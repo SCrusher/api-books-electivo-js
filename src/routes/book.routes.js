@@ -46,8 +46,15 @@ router.put('/:id', function (req, res) {
     res.send("Modificar book ID=" + req.params.id);
 });
 // DELETE
-router.delete('/:id', function (req, res) {
-    res.send("Eliminar book ID=" + req.params.id);
+router.delete('/:id',  async function (req, res) {
+    try {
+        let id = parseInt(req.params.id)
+        console.log(req.params.id)
+        let book = await bookService.delete(id)
+        return res.json(book);
+    }catch (err) {
+        return res.status(500).json(err)
+    }
 });
 
 module.exports = router;

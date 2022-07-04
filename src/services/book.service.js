@@ -42,14 +42,14 @@ const BookService = () => {
             return Promise.reject({ error: true, message: error })
         }
     }
-// delete user on database
-    const deleteBook = (id) => {
-        let book = {
-            id
-        };
-        return book;
+    const deleteBook = async (id) => {
+        try {
+            return await bookRepo.delete(id);
+        } catch (error) {
+            return Promise.reject({ error: true, message: error })
+        }
     }
-    
+
     return {
         findAll: findAllBooks,
         create: createBook,

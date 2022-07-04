@@ -17,6 +17,7 @@ const PostgresProvider = () => {
         return new Promise((resolve, reject) => {
             pool.connect(function (err, client, done) {
                 if (err) reject(err)
+                console.log(sql)
                 client.query(sql, (err, result) => {
                     if (err) reject(err)
                     resolve(result)
@@ -24,7 +25,7 @@ const PostgresProvider = () => {
             });
         })
     }
-
+    
     return {
         query
     }
