@@ -2,6 +2,7 @@
 
 const mysql = require('mysql');
 
+
 const MySQLProvider = () =>{
     let pool = mysql.createPool({
         host: process.env.DB_HOST,
@@ -13,22 +14,20 @@ const MySQLProvider = () =>{
 
     const query = async (sql) => {
         return new Promise((resolve, reject) => {
-            pool.getConnection((err, connection) => {
-                if(err) reject(err)
-
-                connection.query(sql, (err, result) => {
-                    connection.release()
-                    if(err) reject(err)
-
+            pool.getConnection(function (err, client, done) {
+                if (err) reject(err)
+                client.query(sql, (err, result) => {
+                    if (err) reject(err)
                     resolve(result)
                 })
-            })
-        });
+            });
+        })
     }
 
     return {
         query
     }
 }
+
 
 module.exports = MySQLProvider();

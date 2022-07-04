@@ -1,3 +1,3 @@
 module.exports = (app) => {
-    // app.use(route, require);
+    app.use('/books', require('./book.routes'));
 };

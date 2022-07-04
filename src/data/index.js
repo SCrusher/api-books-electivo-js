@@ -1,3 +1,3 @@
 module.exports = {
-    // nameRepo: require,
+    bookRepo: require("./book.repo"),
 };
